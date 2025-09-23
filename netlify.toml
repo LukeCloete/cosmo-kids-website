@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[redirects]]
+  from = "/news-and-events"
+  to = "/thank-you"
+  status = 302
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
