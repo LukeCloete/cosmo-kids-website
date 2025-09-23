@@ -34,7 +34,18 @@ export default function ContactPage() {
     },
   });
 
-  function onSubmit() {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const params = new URLSearchParams({
+      name: values.name,
+      email: values.email,
+      message: values.message,
+    });
+
+    await fetch("/__contactform.html", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString(),
+    });
     alert("Thank you for your inquiry! We will get back to you soon.");
   }
 

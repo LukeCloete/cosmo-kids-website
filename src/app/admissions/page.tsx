@@ -67,9 +67,15 @@ export default function Page() {
     },
   });
 
-  const onSubmit = () => {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const params = new URLSearchParams(values);
+    await fetch("/__admissionsform.html", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString(),
+    });
     alert("Thank you for your inquiry! We will get back to you soon.");
-  };
+  }
 
   return (
     <>

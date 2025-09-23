@@ -21,7 +21,13 @@ export default function Newsletter() {
     },
   });
 
-  function onSubmit() {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const params = new URLSearchParams({ email: values.email });
+    await fetch("/__newsletterform.html", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString(),
+    });
     router.push("/thank-you");
   }
 
