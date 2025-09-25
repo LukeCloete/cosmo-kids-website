@@ -51,7 +51,7 @@ export default function Newsletter() {
               onSubmit={form.handleSubmit(onSubmit)}
               className="w-full flex gap-2"
             >
-              <input type="hidden" name="form-name" value="newsletter" />
+              <input type="hidden" name="newsletter" value="newsletter" />
 
               <FormField
                 control={form.control}

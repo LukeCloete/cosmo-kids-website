@@ -82,7 +82,7 @@ export default function ContactPage() {
               onSubmit={form.handleSubmit(onSubmit)}
               className="space-y-8"
             >
-              <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="contact" value="contact" />
               <FormField
                 control={form.control}
                 name="name"
