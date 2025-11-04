@@ -34,7 +34,13 @@ export default function Contact() {
               </h2>
             </div>
 
-            <form className="space-y-4">
+            <form
+              name="contact"
+              data-netlify="true"
+              method="POST"
+              className="space-y-4"
+            >
+              <input type="hidden" name="form-name" value="contact" />
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <Label htmlFor="parentName" className="text-lg">
@@ -42,6 +48,8 @@ export default function Contact() {
                   </Label>
                   <Input
                     id="parentName"
+                    name="parentName"
+                    type="text"
                     placeholder="Parent Name"
                     className="rounded-full"
                   />
@@ -52,6 +60,7 @@ export default function Contact() {
                   </Label>
                   <Input
                     id="phoneNumber"
+                    name="phoneNumber"
                     type="tel"
                     placeholder="Phone Number"
                     className="rounded-full"
@@ -64,6 +73,8 @@ export default function Contact() {
                 </Label>
                 <Input
                   id="emailAddress"
+                  name="emailAddress"
+                  type="email"
                   placeholder="Email Address"
                   className="rounded-full"
                 />
@@ -74,6 +85,7 @@ export default function Contact() {
                 </Label>
                 <Input
                   id="childAge"
+                  name="childAge"
                   type="number"
                   placeholder="Child's Age"
                   className="rounded-full"
@@ -85,12 +97,16 @@ export default function Contact() {
                 </Label>
                 <Textarea
                   id="childNeeds"
+                  name="childNeeds"
                   placeholder="Tell us about your child's needs..."
                   className="rounded-2xl"
                   rows={4}
                 />
               </div>
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full">
+              <Button
+                type="submit"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full"
+              >
                 Send Message
               </Button>
             </form>

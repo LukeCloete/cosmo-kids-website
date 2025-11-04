@@ -128,8 +128,7 @@ export default function Page() {
                 name="admissions"
                 onSubmit={form.handleSubmit(onSubmit)}
               >
-                <input type="hidden" name="admissions" value="admissions" />
-
+                <input type="hidden" name="form-name" value="admissions" />
                 {/* Child's Details */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <FormField
