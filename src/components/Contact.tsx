@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { Input } from "./ui/input";
@@ -6,6 +9,42 @@ import Image from "next/image";
 import SECTION_IMAGE from "../../public/children3.png";
 
 export default function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError("");
+
+    try {
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+      const formObject: Record<string, string> = {};
+
+      formData.forEach((value, key) => {
+        formObject[key] = value.toString();
+      });
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formObject).toString(),
+      });
+
+      if (response.ok) {
+        window.location.href = "/thank-you";
+      } else {
+        throw new Error("Network response was not ok");
+      }
+    } catch (err) {
+      console.error("Form submission error:", err);
+      setError("Failed to submit. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="py-32 bg-orange-50 relative overflow-hidden">
       <div className="absolute inset-0">
@@ -38,6 +77,7 @@ export default function Contact() {
               name="contact"
               data-netlify="true"
               method="POST"
+              onSubmit={handleSubmit}
               className="space-y-4"
             >
               <input type="hidden" name="form-name" value="contact" />
@@ -103,11 +143,13 @@ export default function Contact() {
                   rows={4}
                 />
               </div>
+              {error && <p className="text-red-500 text-sm">{error}</p>}
               <Button
                 type="submit"
-                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full disabled:opacity-50"
+                disabled={isSubmitting}
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </div>

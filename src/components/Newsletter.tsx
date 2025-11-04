@@ -4,6 +4,7 @@ import { Input } from "./ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 
@@ -13,6 +14,7 @@ const formSchema = z.object({
 
 export default function Newsletter() {
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -22,13 +24,33 @@ export default function Newsletter() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const params = new URLSearchParams({ email: values.email });
-    await fetch("/__newsletterform.html", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.toString(),
-    });
-    router.push("/thank-you");
+    setIsSubmitting(true);
+    try {
+      const data: Record<string, string> = {
+        "form-name": "newsletter",
+        email: values.email,
+      };
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data).toString(),
+      });
+
+      if (response.ok) {
+        router.push("/thank-you");
+      } else {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      form.setError("email", {
+        type: "submitError",
+        message: "Failed to submit. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -72,9 +94,10 @@ export default function Newsletter() {
               />
               <Button
                 type="submit"
-                className="bg-white text-blue-500 hover:bg-blue-200"
+                disabled={isSubmitting}
+                className="bg-white text-blue-500 hover:bg-blue-200 disabled:opacity-50"
               >
-                Subscribe
+                {isSubmitting ? "Subscribing..." : "Subscribe"}
               </Button>
             </form>
           </Form>

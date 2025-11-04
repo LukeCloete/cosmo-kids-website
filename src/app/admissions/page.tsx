@@ -2,6 +2,8 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import * as z from "zod";
 import {
   Form,
@@ -47,6 +49,9 @@ const formSchema = z.object({
 type AdmissionsFormValues = z.infer<typeof formSchema>;
 
 export default function Page() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+
   const form = useForm<AdmissionsFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -68,13 +73,35 @@ export default function Page() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const params = new URLSearchParams(values);
-    await fetch("/__admissionsform.html", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.toString(),
-    });
-    alert("Thank you for your inquiry! We will get back to you soon.");
+    setIsSubmitting(true);
+    try {
+      const formData: Record<string, string> = {
+        "form-name": "admissions",
+        ...Object.fromEntries(
+          Object.entries(values).map(([key, value]) => [key, String(value)])
+        ),
+      };
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      });
+
+      if (response.ok) {
+        router.push("/thank-you");
+      } else {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      form.setError("root", {
+        type: "submitError",
+        message: "Failed to submit. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -350,9 +377,18 @@ export default function Page() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full bg-orange-500">
-                  Submit
+                <Button
+                  type="submit"
+                  className="w-full bg-orange-500 disabled:opacity-50"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Submitting..." : "Submit"}
                 </Button>
+                {form.formState.errors.root && (
+                  <p className="text-red-500 text-sm text-center mt-2">
+                    {form.formState.errors.root.message}
+                  </p>
+                )}
               </form>
             </Form>
           </div>
