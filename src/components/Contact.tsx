@@ -26,7 +26,7 @@ export default function Contact() {
         formObject[key] = value.toString();
       });
 
-      const response = await fetch("/", {
+      const response = await fetch("/__contactform.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formObject).toString(),
