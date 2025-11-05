@@ -41,7 +41,7 @@ export default function ContactPage() {
       message: values.message,
     });
 
-    await fetch("/__contactform.html", {
+    await fetch("/__secondarycontactform.html", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: params.toString(),
@@ -76,13 +76,11 @@ export default function ContactPage() {
         <div className="max-w-2xl mx-auto px-6">
           <Form {...form}>
             <form
-              name="contact"
-              data-netlify="true"
-              method="POST"
+              name="secondarycontact"
               onSubmit={form.handleSubmit(onSubmit)}
               className="space-y-8"
             >
-              <input type="hidden" name="contact" value="contact" />
+              <input type="hidden" name="form-name" value="secondarycontact" />
               <FormField
                 control={form.control}
                 name="name"

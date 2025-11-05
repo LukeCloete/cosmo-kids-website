@@ -26,7 +26,7 @@ export default function Contact() {
         formObject[key] = value.toString();
       });
 
-      const response = await fetch("/__contactform.html", {
+      const response = await fetch("/__maincontactform.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formObject).toString(),
@@ -47,7 +47,7 @@ export default function Contact() {
 
   return (
     <section className="py-32 bg-orange-50 relative overflow-hidden">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-0">
         <div className="absolute top-10 left-10 w-20 h-20 bg-green-300 rounded-full opacity-60"></div>
         <div className="absolute top-20 right-20 w-16 h-16 bg-red-300 rounded-full opacity-60"></div>
 
@@ -73,8 +73,12 @@ export default function Contact() {
               </h2>
             </div>
 
-            <form name="contact" onSubmit={handleSubmit} className="space-y-4">
-              <input type="hidden" name="form-name" value="contact" />
+            <form
+              name="maincontact"
+              onSubmit={handleSubmit}
+              className="space-y-4 z-20"
+            >
+              <input type="hidden" name="form-name" value="maincontact" />
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <Label htmlFor="parentName" className="text-lg">
