@@ -31,7 +31,7 @@ export default function Newsletter() {
         email: values.email,
       };
 
-      const response = await fetch("/", {
+      const response = await fetch("/__newsletterform.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(data).toString(),
@@ -68,8 +68,6 @@ export default function Newsletter() {
           <Form {...form}>
             <form
               name="newsletter"
-              data-netlify="true"
-              method="POST"
               onSubmit={form.handleSubmit(onSubmit)}
               className="w-full flex gap-2"
             >

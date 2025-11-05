@@ -73,13 +73,7 @@ export default function Contact() {
               </h2>
             </div>
 
-            <form
-              name="contact"
-              data-netlify="true"
-              method="POST"
-              onSubmit={handleSubmit}
-              className="space-y-4"
-            >
+            <form name="contact" onSubmit={handleSubmit} className="space-y-4">
               <input type="hidden" name="form-name" value="contact" />
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-1">

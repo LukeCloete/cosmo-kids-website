@@ -82,7 +82,7 @@ export default function Page() {
         ),
       };
 
-      const response = await fetch("/", {
+      const response = await fetch("/__admissionsform.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData).toString(),
@@ -150,8 +150,6 @@ export default function Page() {
             <Form {...form}>
               <form
                 className="p-8 flex flex-col gap-4 bg-white w-[90%] xl:w-[100%]"
-                data-netlify="true"
-                method="POST"
                 name="admissions"
                 onSubmit={form.handleSubmit(onSubmit)}
               >
