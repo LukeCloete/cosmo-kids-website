@@ -23,7 +23,7 @@ const navLinks = [
     href: "#",
     dropdown: [
       { name: "Bouncy Bunnies (6-12m)", href: "/classes/bouncy-bunnies" },
-      { name: "Jolly Giraffe (1-2y)", href: "/classes/jolly-giraffe" },
+      { name: "Jolly Giraffes (1-2y)", href: "/classes/jolly-giraffes" },
       { name: "Smart Lions (2-3y)", href: "/classes/smart-lions" },
       { name: "Clever Cats (3-4y)", href: "/classes/clever-cats" },
       { name: "Wise Mice (4-5y)", href: "/classes/wise-mice" },

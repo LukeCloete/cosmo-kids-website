@@ -81,7 +81,7 @@ export default function Programs() {
                       .toLowerCase()
                       .replace(/\s+/g, "-")}`}
                   >
-                    Join {program.classname}
+                    Take a peek at the {program.classname}
                   </Link>
                 </Button>
               </CardContent>

@@ -60,7 +60,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xl font-bold mb-4 z-20">Apply For Classes</h4>
+            <h4 className="text-xl font-bold mb-4 z-20">View Our Classes</h4>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -72,7 +72,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/classes/jolly-giraffe"
+                  href="/classes/jolly-giraffes"
                   className="hover:text-orange-500"
                 >
                   Jolly Giraffes (1-2 Years)
