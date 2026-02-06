@@ -1,54 +1,6 @@
-"use client";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-
-const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  message: z
-    .string()
-    .min(10, { message: "Message must be at least 10 characters." }),
-});
+import Link from "next/link";
 
 export default function ContactPage() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
-  });
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    const params = new URLSearchParams({
-      name: values.name,
-      email: values.email,
-      message: values.message,
-    });
-
-    await fetch("/__secondarycontactform.html", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.toString(),
-    });
-    alert("Thank you for your inquiry! We will get back to you soon.");
-  }
-
   return (
     <>
       <section className="relative bg-gradient-to-b from-sky-200 to-sky-100 pt-24 pb-16 overflow-hidden">
@@ -63,75 +15,115 @@ export default function ContactPage() {
             <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 leading-tight">
               Contact <span className="text-orange-500">Us</span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              We&apos;d love to hear from you! Whether you have a question about
-              our classes, enrollment, or anything else, our team is ready to
-              answer all your questions.
-            </p>
           </div>
         </div>
       </section>
 
       <section className="py-20 bg-white">
-        <div className="max-w-2xl mx-auto px-6">
-          <Form {...form}>
-            <form
-              name="secondarycontact"
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-8"
-            >
-              <input type="hidden" name="form-name" value="secondarycontact" />
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your Name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="your.email@example.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Message</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Your message..."
-                        className="resize-none"
-                        {...field}
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Contact Information */}
+            <div className="space-y-8">
+              <h2 className="text-3xl font-bold text-gray-800">Get in Touch</h2>
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
+                    <svg
+                      className="w-5 h-5 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                        clipRule="evenodd"
                       />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button
-                type="submit"
-                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold text-lg"
-              >
-                Send Message
-              </Button>
-            </form>
-          </Form>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      Address
+                    </h3>
+                    <p className="text-gray-600">
+                      32 General Murtala Muhammed Rd
+                      <br />
+                      Windhoek
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
+                    <svg
+                      className="w-5 h-5 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      Phone
+                    </h3>
+                    <Link href="tel:0814077677">
+                      <p className="text-gray-600 hover:text-orange-500">
+                        081 407 7677
+                      </p>
+                    </Link>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
+                    <svg
+                      className="w-5 h-5 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      Email
+                    </h3>
+                    <Link href="mailto:michelle@cosmokids.com.na">
+                      <p className="text-gray-600 hover:text-orange-500">
+                        michelle@cosmokids.com.na
+                      </p>
+                    </Link>
+                    <Link href="mailto:jodi@cosmokids.com.na">
+                      <p className="text-gray-600 hover:text-orange-500">
+                        jodi@cosmokids.com.na
+                      </p>
+                    </Link>
+                    <Link href="mailto:admissions@cosmokids.com.na">
+                      <p className="text-gray-600 hover:text-orange-500">
+                        admissions@cosmokids.com.na
+                      </p>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Google Maps Embed */}
+            <div className="space-y-8">
+              <h2 className="text-3xl font-bold text-gray-800">Find Us</h2>
+              <div className="w-full h-96 rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d662.5291799082945!2d17.088365737736904!3d-22.54623365604912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1c0b1ca7f725c2db%3A0xe216d0d23201b0fe!2sCosmoKids!5e1!3m2!1sen!2sna!4v1770208658247!5m2!1sen!2sna"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Cosmo Kids Location"
+                ></iframe>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </>

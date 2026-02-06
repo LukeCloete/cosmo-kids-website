@@ -116,8 +116,8 @@ export default function Footer() {
 
         <div className="border-t border-blue-500 mt-12 pt-8 text-center text-blue-100">
           <p>
-            &copy; 2025 Cosmo Kids. All rights reserved. | Privacy Policy |
-            Terms of Service | Powered by BI-Dynamics
+            &copy; {new Date().getFullYear()} Cosmo Kids. All rights reserved. |
+            Privacy Policy | Terms of Service | Powered by BI-Dynamics
           </p>
         </div>
       </div>

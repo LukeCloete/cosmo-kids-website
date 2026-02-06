@@ -6,7 +6,6 @@ import { Calendar, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getNewsArticles, NewsArticle } from "@/lib/data";
-import Newsletter from "@/components/Newsletter";
 
 export default function NewsEventsPage() {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
@@ -219,9 +218,6 @@ export default function NewsEventsPage() {
             </Link>
           ))}
         </div>
-
-        {/* Newsletter Signup */}
-        <Newsletter />
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import SECTION_IMAGE from "../../public/FlyGraphic1.png";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -37,14 +38,18 @@ export default function Hero() {
               aftercare centre.
             </p>
             <div className="flex gap-4">
-              <Button className="bg-orange-500 rounded-full hover:bg-orange-600 text-white px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+              <Button  className="bg-orange-500 rounded-full hover:bg-orange-600 text-white px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                <Link href="/admissions">
                 Admissions
+                </Link>
               </Button>
               <Button
                 variant={"secondary"}
                 className=" rounded-full hover:bg-gray-400 text-gray-800 hover:text-white px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition transform hover:-translate-y-1"
               >
+                <Link href="/contact">
                 Contact Us
+                </Link>
               </Button>
             </div>
           </div>

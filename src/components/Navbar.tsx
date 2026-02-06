@@ -13,9 +13,7 @@ const navLinks = [
     href: "/about-us",
     dropdown: [
       { name: "About Cosmo Kids", href: "/about-cosmo-kids" },
-      { name: "How We Started", href: "/how-we-started" },
-      { name: "What We Do", href: "/what-we-do" },
-      { name: "Activities", href: "/activities" },
+      { name: "Our Activities", href: "/activities" },
     ],
   },
   {
