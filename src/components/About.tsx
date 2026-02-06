@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import SECTION_IMAGE from "/public/children-cosmo2.png";
+import Link from "next/link";
 
 export default function About() {
   return (
@@ -39,7 +40,9 @@ export default function About() {
               </p>
             </div>
             <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 w-max">
+              <Link href="/about-cosmo-kids">
               Read More About Us
+              </Link>
             </Button>
           </div>
         </div>
