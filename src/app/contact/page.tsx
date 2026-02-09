@@ -63,11 +63,11 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-800">
-                      Phone
+                      Landline
                     </h3>
                     <Link href="tel:0814077677">
                       <p className="text-gray-600 hover:text-orange-500">
-                        081 407 7677
+                        083 727 7676
                       </p>
                     </Link>
                   </div>
