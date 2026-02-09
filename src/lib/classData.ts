@@ -8,6 +8,8 @@ export interface Class {
   description: string;
   imageUrl: string;
   galleryImages: string[];
+  funActivities: {lucideIcon: string, title: string, description: string}[];
+  dailyLife: {lucideIcon: string, title: string, description: string}[];
 }
 
 export const getClasses = async (): Promise<Class[]> => {

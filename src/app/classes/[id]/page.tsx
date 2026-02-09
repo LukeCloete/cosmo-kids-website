@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import CTA from "@/components/CTA";
 import { GalleryOverlay } from "@/components/GalleryOverlay";
+import DynamicIcon from "@/components/DynamicIcon";
 
 interface ClassPageProps {
   params: {
@@ -48,7 +49,7 @@ const ClassPage: React.FC<ClassPageProps> = ({ params }) => {
         );
         if (foundClass) {
           setClassData(foundClass);
-          console.log("Fetched class data:", foundClass); // Added console.log
+         
         } else {
           setError("Class not found.");
         }
@@ -138,52 +139,33 @@ const ClassPage: React.FC<ClassPageProps> = ({ params }) => {
                 alt={classData.classname}
                 width={600}
                 height={400}
-                className="w-full h-auto rounded-2xl shadow-lg"
+                className="w-full h-auto object-cover rounded-2xl"
               />
             </div>
             <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <Smile className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
-                    Growing Independence
-                  </h3>
-                  <p className="text-gray-600">
-                    We are already potty trained and can do almost everything on
-                    our own.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="bg-green-100 p-3 rounded-full">
-                  <Mic className="w-6 h-6 text-green-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
-                    Joyful Expressions
-                  </h3>
-                  <p className="text-gray-600">
-                    We love to laugh and sing and dance.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="bg-purple-100 p-3 rounded-full">
-                  <MessageCircle className="w-6 h-6 text-purple-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
-                    Chatterboxes
-                  </h3>
-                  <p className="text-gray-600">
-                    We can chat and reason and make you laugh.
-                  </p>
-                </div>
-              </div>
+              
+              {
+                classData.dailyLife.map((lifeItem, index) => (
+                  <div key={index} className="flex items-start space-x-4">
+                    <div className={`p-3 rounded-full ${
+                      index % 3 === 0 ? "bg-blue-100" : index % 3 === 1 ? "bg-green-100" : "bg-purple-100"
+                    }`}>
+                      
+                      <DynamicIcon name={lifeItem.lucideIcon} className={`w-6 h-6 ${
+                        index % 3 === 0 ? "text-blue-600" : index % 3 === 1 ? "text-green-600" : "text-purple-600"
+                      }`} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-800 mb-2">
+                        {lifeItem.title}
+                      </h3>
+                      <p className="text-gray-600">
+                        {lifeItem.description}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -202,41 +184,26 @@ const ClassPage: React.FC<ClassPageProps> = ({ params }) => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white shadow-lg border-0 rounded-2xl overflow-hidden p-8 text-center space-y-4">
-              <div className="bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto">
-                <Paintbrush className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-800">
-                Creative Minds
-              </h3>
-              <p className="text-gray-600">
-                We can scribble and paint and cut and mold.
-              </p>
-            </div>
-
-            <div className="bg-white shadow-lg border-0 rounded-2xl overflow-hidden p-8 text-center space-y-4">
-              <div className="bg-green-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto">
-                <Cpu className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-800">
-                Exploring & Building
-              </h3>
-              <p className="text-gray-600">
-                We can build and climb and explore and lots more.
-              </p>
-            </div>
-
-            <div className="bg-white shadow-lg border-0 rounded-2xl overflow-hidden p-8 text-center space-y-4">
-              <div className="bg-purple-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto">
-                <Puzzle className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-800">
-                Problem Solvers
-              </h3>
-              <p className="text-gray-600">
-                We love to solve puzzles and take on new challenges.
-              </p>
-            </div>
+            {
+              classData.funActivities.map((activity, index) => (
+                <div
+                  key={index}
+                  className="bg-white  border-0 rounded-2xl overflow-hidden p-8 text-center space-y-4"
+                >
+                  <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto ${
+                    index % 3 === 0 ? "bg-blue-500" : index % 3 === 1 ? "bg-green-500" : "bg-purple-500"
+                  }`}>
+                    <DynamicIcon name={activity.lucideIcon} className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800">
+                    {activity.title}
+                  </h3>
+                  <p className="text-gray-600">
+                    {activity.description}
+                  </p>
+                </div>
+              ))
+            }
           </div>
         </div>
       </section>
@@ -250,20 +217,22 @@ const ClassPage: React.FC<ClassPageProps> = ({ params }) => {
           </div>
           {classData.galleryImages && classData.galleryImages.length > 0 && (
             <div className="grid md:grid-cols-3 gap-8">
-              {classData.galleryImages.map(
+              {classData.galleryImages && classData.galleryImages.map(
                 (imageUrl: string, index: number) => (
                   <div
                     key={index}
                     className="relative h-64 w-full rounded-lg overflow-hidden shadow-lg cursor-pointer group"
                     onClick={() => openGallery(index)}
                   >
+                    {imageUrl && (
                     <Image
                       src={imageUrl}
                       alt={`Classroom image ${index + 1}`}
                       width={600}
                       height={400}
                       className="transition-transform object-cover group-hover:scale-105"
-                    />
+                      />
+                    )}
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all rounded-lg"></div>
                   </div>
                 )
