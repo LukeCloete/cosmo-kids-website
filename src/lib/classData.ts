@@ -1,4 +1,4 @@
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, getDocsFromServer, orderBy, query } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
 export interface Class {
@@ -15,7 +15,7 @@ export interface Class {
 export const getClasses = async (): Promise<Class[]> => {
   const classesCollection = collection(db, "classes");
   const q = query(classesCollection, orderBy("ageRange"));
-  const classesSnapshot = await getDocs(q);
+  const classesSnapshot = await getDocsFromServer(q);
   const classesList = classesSnapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),

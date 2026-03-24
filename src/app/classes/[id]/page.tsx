@@ -49,6 +49,7 @@ const ClassPage: React.FC<ClassPageProps> = ({ params }) => {
         );
         if (foundClass) {
           setClassData(foundClass);
+          console.log(foundClass);
          
         } else {
           setError("Class not found.");
