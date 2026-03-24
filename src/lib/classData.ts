@@ -1,4 +1,4 @@
-import { collection, getDocs, getDocsFromServer, orderBy, query } from "firebase/firestore";
+import { collection, getDocsFromServer, orderBy, query } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
 export interface Class {

@@ -9,6 +9,7 @@ interface DynamicIconProps extends LucideProps {
 const DynamicIcon: React.FC<DynamicIconProps> = ({ name, ...props }) => {
   // Access the icon from the imported module
   // We need to cast to any because accessing by string index on the module isn't strictly typed
+  // @ts-ignore
   const IconComponent = (LucideIcons as any)[name];
 
   if (!IconComponent) {

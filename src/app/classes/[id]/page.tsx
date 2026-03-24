@@ -2,14 +2,7 @@
 import React from "react";
 import { getClasses, Class } from "@/lib/classData";
 import Image from "next/image";
-import {
-  Smile,
-  Mic,
-  MessageCircle,
-  Paintbrush,
-  Cpu,
-  Puzzle,
-} from "lucide-react";
+
 import CTA from "@/components/CTA";
 import { GalleryOverlay } from "@/components/GalleryOverlay";
 import DynamicIcon from "@/components/DynamicIcon";
