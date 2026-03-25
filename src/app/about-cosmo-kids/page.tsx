@@ -148,7 +148,7 @@ export default function AboutPage() {
                   A Little Silly And A Lot Of Love
                 </h3>
                 <p className="text-gray-600">
-                  Our staff is fun, silly, playful, loving and passionate about children. They are excited to do the best job under God&apos;s sun. The highest and most important qualification being crazy about children.
+                  Our staff are fun, silly, playful, loving and passionate about children. They are excited to do the best job under God&apos;s sun. The highest and most important qualification being crazy about children.
                 </p>
               </CardContent>
             </Card>
