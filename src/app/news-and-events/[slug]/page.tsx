@@ -6,7 +6,6 @@ import Link from "next/link";
 import { getNewsArticles, NewsArticle } from "@/lib/data";
 import { stateToHTML } from "draft-js-export-html";
 import { convertFromRaw } from "draft-js";
-import Newsletter from "@/components/Newsletter";
 
 interface BlogPostPageProps {
   params: {
@@ -169,9 +168,6 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             dangerouslySetInnerHTML={{ __html: articleHtml }}
           />
         </div>
-
-        {/* Newsletter Signup */}
-        <Newsletter />
       </div>
     </div>
   );

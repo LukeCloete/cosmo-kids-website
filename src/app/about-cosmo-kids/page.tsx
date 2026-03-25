@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Users, Book, Handshake, Lightbulb } from "lucide-react";
+import { Heart, Users, Book, Handshake, Lightbulb, Info } from "lucide-react";
 import Image from "next/image";
 import ABOUT_HERO_IMAGE from "../../../public/playgrounds3.webp";
 import CTA from "@/components/CTA";
@@ -50,7 +50,7 @@ export default function AboutPage() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-2 items-center">
             <div className="relative">
               <Image
                 src={ABOUT_HERO_IMAGE}
@@ -70,10 +70,7 @@ export default function AboutPage() {
                     A Passion for Children
                   </h3>
                   <p className="text-gray-600">
-                    Founded in July 2006, Cosmo Kids is guided by a deep passion
-                    for children&apos;s education and well-being. Our focus is
-                    to create a fun and loving environment where children can
-                    thrive.
+                    Founded in July 2006, Cosmo Kids is run by Michelle and Jodi Schumacher, mother and daughter. Michelle bought Kiddi Care in 2000, to create a suitable kindergarden for her children, while she worked part time. She sold it in 2004 and then started Cosmo Kids in 2006. Jodi joined her mom and runs the junior section of the school, she has a degree in psychology and teaching, and is just as passionate about children as her mom.
                   </p>
                 </div>
               </div>
@@ -107,9 +104,10 @@ export default function AboutPage() {
                   <p className="text-gray-600">
                     Cosmo Kids is a registered Private School with the Ministry
                     of Education. We have 5 houses that cater to 7 different age
-                    groups, ensuring a dedicated space for every child&apos;s
+                    groups, from 6 months to 6 years, ensuring a dedicated space for each child&apos;s
                     learning journey.
                   </p>
+                  <span className="text-purple-500 font-bold flex items-center gap-2"><Info/>All areas are monitored by CCTV</span>
                 </div>
               </div>
             </div>
@@ -133,12 +131,10 @@ export default function AboutPage() {
                   <Users className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800">
-                  A Team of 35
+                  A Team of 37
                 </h3>
                 <p className="text-gray-600">
-                  Cosmo Kids is blessed with an awesome staff of 35 members,
-                  each of whom is passionate about what they do and loves
-                  children.
+                  Cosmo Kids consists of a team of 37 staff members, hand-picked for their wonderful and loving personalities.
                 </p>
               </CardContent>
             </Card>
@@ -149,12 +145,10 @@ export default function AboutPage() {
                   <Heart className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800">
-                  A Little Crazy, A Lot of Love
+                  A Little Silly And A Lot Of Love
                 </h3>
                 <p className="text-gray-600">
-                  Our staff is fun, loving, silly, and happy. We are excited to
-                  do the best job under God&apos;s sun, and the most important
-                  quality we require is an absolute love for children.
+                  Our staff is fun, silly, playful, loving and passionate about children. They are excited to do the best job under God&apos;s sun. The highest and most important qualification being crazy about children.
                 </p>
               </CardContent>
             </Card>
@@ -168,8 +162,7 @@ export default function AboutPage() {
                   Dedicated to Education
                 </h3>
                 <p className="text-gray-600">
-                  We are a dedicated team focused on making each day a positive
-                  and enriching experience for every child in our care.
+                  We are dedicated to each child&apos;s holistic and individual growth. We focus on age-appropriate milestones, while emotional intelligence is our number one goal, for creating strong christian based foundations, that will stay with them for life.
                 </p>
               </CardContent>
             </Card>
