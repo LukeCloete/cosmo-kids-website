@@ -7,12 +7,16 @@ import Testimonials from "@/components/Testimonials";
 import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
 import Gallery from "@/components/Gallery";
+import SchoolVideos from "@/components/SchoolVideos";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <Hero />
+
+      {/* Junior & Senior School Videos (hero buttons scroll here) */}
+      <SchoolVideos />
 
       {/* About Section */}
       <About />
