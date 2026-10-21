@@ -3,6 +3,14 @@ import { Heart, Users, Book, Handshake, Lightbulb, Info } from "lucide-react";
 import Image from "next/image";
 import ABOUT_HERO_IMAGE from "../../../public/playgrounds3.webp";
 import CTA from "@/components/CTA";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "About Us",
+  description:
+    "Founded in 2006 and run by mother-and-daughter team Michelle and Jodi Schumacher, Cosmo Kids is a safe, loving pre-school for ages 6 months to 6 years.",
+  path: "/about-cosmo-kids",
+});
 
 export default function AboutPage() {
   return (

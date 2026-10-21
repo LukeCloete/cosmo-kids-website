@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Card, CardContent } from "./ui/card";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { getNewsArticles, NewsArticle } from "@/lib/data";
+import { getNewsArticles, NewsArticle, toArticleSlug } from "@/lib/data";
 
 export default async function Blog() {
   const articles: NewsArticle[] = await getNewsArticles();
@@ -19,7 +19,10 @@ export default async function Blog() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {latestArticles.map((article) => (
-            <Link key={article.id} href={`/news-and-events/${article.id}`}>
+            <Link
+              key={article.id}
+              href={`/news-and-events/${toArticleSlug(article.title)}`}
+            >
               <Card
                 key={article.id}
                 className="bg-white border-2 border-orange-300 rounded-2xl overflow-hidden shadow-lg"

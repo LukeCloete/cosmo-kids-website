@@ -1,47 +1,24 @@
-"use client";
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { getNewsArticles, NewsArticle } from "@/lib/data";
+import { fetchNewsArticles } from "@/lib/data";
+import { pageMetadata } from "@/lib/seo";
 
-export default function NewsEventsPage() {
-  const [articles, setArticles] = useState<NewsArticle[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export const metadata = pageMetadata({
+  title: "News & Events",
+  description:
+    "The latest news and upcoming events at Cosmo Kids, from concerts and bazaars to sleepovers and story nights.",
+  path: "/news-and-events",
+});
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        const fetchedArticles = await getNewsArticles();
-        setArticles(fetchedArticles);
-      } catch (err) {
-        setError("Failed to fetch articles.");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchArticles();
-  }, []);
+// Pre-rendered with the article list (so search engines can read it) and
+// re-fetched from the CMS at most every 5 minutes
+export const revalidate = 300;
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        Loading articles...
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-red-500">
-        {error}
-      </div>
-    );
-  }
+export default async function NewsEventsPage() {
+  const articles = await fetchNewsArticles();
 
   // const featuredPost = articles.find((post) => post.featured);
   // const regularPosts = articles.filter((post) => !post.featured);

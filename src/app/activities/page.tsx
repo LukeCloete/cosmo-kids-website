@@ -17,6 +17,14 @@ import {
 import Image from "next/image";
 import CLASSROOM_IMAGE from "../../../public/classroom.webp";
 import CTA from "@/components/CTA";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Daily Activities",
+  description:
+    "A day at Cosmo Kids: structured timetables filled with reading, music, creative arts, outdoor play, sensory and problem-solving activities.",
+  path: "/activities",
+});
 
 const dailyActivities = [
   {

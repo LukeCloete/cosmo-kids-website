@@ -57,18 +57,25 @@ export interface NewsArticle {
   author: string;
 }
 
+// URL segment for an article, matching the links on the News + Events page
+export const toArticleSlug = (title: string) =>
+  title.toLowerCase().replace(/\s+/g, "-");
+
+// Throws on failure, so server-rendered pages show an error (and keep their
+// cached copy) rather than rendering as empty or "not found"
+export const fetchNewsArticles = async (): Promise<NewsArticle[]> => {
+  const newsCollection = collection(db, "news-events");
+  const q = query(newsCollection, orderBy("date", "desc")); // Order by date descending
+  const newsSnapshot = await getDocs(q);
+  return newsSnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...(doc.data() as Omit<NewsArticle, "id">),
+  }));
+};
+
 export const getNewsArticles = async (): Promise<NewsArticle[]> => {
   try {
-    const newsCollection = collection(db, "news-events");
-    const q = query(newsCollection, orderBy("date", "desc")); // Order by date descending
-    const newsSnapshot = await getDocs(q);
-    const newsList = newsSnapshot.docs.map((doc) => {
-      return {
-        id: doc.id,
-        ...(doc.data() as Omit<NewsArticle, "id">),
-      };
-    });
-    return newsList;
+    return await fetchNewsArticles();
   } catch (error) {
     console.error("Error fetching news articles: ", error);
     return [];
@@ -81,7 +88,7 @@ export const getNewsArticleBySlug = async (
   try {
     const allArticles = await getNewsArticles(); // Fetch all articles
     const foundArticle = allArticles.find(
-      (article) => article.title.toLowerCase().replace(/\s+/g, "-") === slug
+      (article) => toArticleSlug(article.title) === slug
     );
     return foundArticle || null;
   } catch (error) {

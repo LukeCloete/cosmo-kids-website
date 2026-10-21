@@ -12,6 +12,10 @@ export interface Class {
   dailyLife: {lucideIcon: string, title: string, description: string}[];
 }
 
+// URL segment for a class, e.g. "Jolly Giraffes" -> "jolly-giraffes"
+export const toClassSlug = (classname: string) =>
+  classname.toLowerCase().replace(/\s+/g, "-");
+
 export const getClasses = async (): Promise<Class[]> => {
   const classesCollection = collection(db, "classes");
   const q = query(classesCollection, orderBy("ageRange"));
