@@ -1,4 +1,12 @@
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Contact Us",
+  description:
+    "Visit Cosmo Kids at 32 General Murtala Muhammed Rd, Windhoek, or call or email us about our pre-school, play-school and aftercare.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
@@ -65,7 +73,7 @@ export default function ContactPage() {
                     <h3 className="text-lg font-semibold text-gray-800">
                       Landline
                     </h3>
-                    <Link href="tel:0814077677">
+                    <Link href="tel:+264837277676">
                       <p className="text-gray-600 hover:text-orange-500">
                         083 727 7676
                       </p>
